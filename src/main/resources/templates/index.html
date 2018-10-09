@@ -1,3 +1,6 @@
+<!--
+  博客首页
+-->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -10,6 +13,9 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
   <link rel="stylesheet" th:href="@{/css/amazeui.min.css}"/>
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/underscore.js/1.9.0/underscore-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/amazeui/2.7.2/js/amazeui.min.js"></script>
   <style>
     @media only screen and (min-width: 1200px) {
       .blog-g-fixed {
@@ -63,32 +69,13 @@
       padding: 10px 0;
       text-align: center;
     }
+
   </style>
 </head>
 <body>
-<header class="am-topbar">
-  <h1 class="am-topbar-brand">
-    <a href="#">CopaBlog</a>
-  </h1>
+<!--网站头部-->
+<header th:replace="publicPage/blog_bar::header">
 
-  <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
-          data-am-collapse="{target: '#doc-topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span
-      class="am-icon-bars"></span></button>
-
-  <div class="am-g" id="doc-topbar-collapse">
-    <div class="am-u-sm-6">
-    <ul class="am-nav am-nav-pills am-topbar-nav">
-      <li class="am-active"><a href="#">首页</a></li>
-      <li><a href="#">标题1</a></li>
-    </ul>
-    </div>
-    <div class="am-u-sm-2">
-      <ul class="am-nav am-nav-pills am-topbar-nav">
-        <li><a href="#"><span class="am-icon-user">登录</span></a></li>
-      </ul>
-    </div>
-
-  </div>
 </header>
 
 <div class="am-g am-g-fixed blog-g-fixed">
@@ -101,7 +88,7 @@
 
       <div class="am-g blog-content">
         <div class="am-u-lg-7">
-         <p>内容</p>
+          <p>内容</p>
         </div>
         <div class="am-u-lg-5">
           <p>图片</p>
@@ -205,22 +192,19 @@
 
 </div>
 
-<footer class="blog-footer">
-  <p>Copa Blog<br/>
-    <small>©2018, Copa</small>
-  </p>
-</footer>
+<!--网站尾部-->
+<footer th:replace="publicPage/blog_bar::footer"></footer>
 
 <!--[if lt IE 9]>
 <script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
+<script th:src="@{js/amazeui.ie8polyfill.min.js}"></script>
 <![endif]-->
 
 <!--[if (gte IE 9)|!(IE)]><!-->
-<script th:src="@{assets/js/jquery.min.js}"></script>
+<script th:src="@{js/jquery.min.js}"></script>
 <!--<![endif]-->
-<script th:src="@{assets/js/amazeui.min.js}"></script>
+<script th:src="@{js/amazeui.min.js}"></script>
 
 </body>
 </html>
