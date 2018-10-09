@@ -7,8 +7,5 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ArticleController {
 
-    @RequestMapping(value = "/t",method = RequestMethod.GET)
-    public String test(){
-        return "index";
-    }
+
 }
