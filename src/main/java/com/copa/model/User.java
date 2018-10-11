@@ -13,7 +13,7 @@ import java.util.List;
  * 用户实体类
  */
 @Data
-public class User implements UserDetails{
+public class User{
 
     private int id;
 
@@ -72,30 +72,5 @@ public class User implements UserDetails{
         this.avatarImgUrl = avatarImgUrl;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> auths = new ArrayList<>();
-        auths.add(new SimpleGrantedAuthority("USER"));
-        return auths;
-    }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }

@@ -7,9 +7,7 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-@Mapper
 public interface UserRepository {
 
-    @Select("select * from user where phone=#{phone}")
     User findByPhone(String phone);
 }

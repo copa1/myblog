@@ -1,27 +1,46 @@
 package com.copa.service.security;
 
+import com.copa.model.Role;
 import com.copa.model.User;
+import com.copa.repository.mybatis.UserRepository;
+import com.copa.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ *  用户登录处理
+ */
+
 @Service
 public class CustomUserService implements UserDetailsService{
 
     @Autowired
-    private SystemUserService systemUserService;
+    UserRepository userRepository;
+    @Autowired
+    private UserService userService;
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
         //根据用户名从数据库查询对应记录
-        User user=systemUserService.findByPhone(s);
+        User user=userRepository.findByPhone(phone);
         if (user == null){
-            throw new UsernameNotFoundException("用户不存在！");
+            return (UserDetails) new UsernameNotFoundException("用户不存在");
         }
 
-        System.out.println("username is : " + user.getUsername() + ", password is :" + user.getPassword());
-        return user;
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
+        for(Role role : user.getRoles()){
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        }
+
+        System.out.println(phone + "用户登录成功");
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
     }
 }
