@@ -10,7 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-//主页设置、定制错误页面
+/**
+ * 主页设置、定制错误页面
+ */
+
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 

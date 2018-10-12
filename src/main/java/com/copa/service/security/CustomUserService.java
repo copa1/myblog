@@ -4,6 +4,7 @@ import com.copa.model.Role;
 import com.copa.model.User;
 import com.copa.repository.mybatis.UserRepository;
 import com.copa.service.UserService;
+import com.copa.utils.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,6 +35,9 @@ public class CustomUserService implements UserDetailsService{
             return (UserDetails) new UsernameNotFoundException("用户不存在");
         }
 
+        TimeUtil timeUtil = new TimeUtil();
+        String recentlyLanded = timeUtil.getFormatDateForSix();
+        userService.updateRecentlyLanded(user.getUsername(), recentlyLanded);
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
         for(Role role : user.getRoles()){

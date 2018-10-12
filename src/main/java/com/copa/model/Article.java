@@ -2,7 +2,7 @@ package com.copa.model;
 
 import lombok.Data;
 
-/*
+/**
 *   文章
 */
 @Data
