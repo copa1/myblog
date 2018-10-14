@@ -15,5 +15,10 @@ public class BackController {
         return "login";
     }
 
+    //打开注册页面
+    @GetMapping("/register")
+    public String register(){
+        return "register";
+    }
 
 }

@@ -42,6 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                         return md5Util.encode((String) rawPassword);
                     }
 
+                    //验证（用户输入的密码采用MD5加密后核对数据库里的的密码）
                     @Override
                     public boolean matches(CharSequence rawPassword, String encodedPassword) {
                         return encodedPassword.equals(md5Util.encode((String)rawPassword));

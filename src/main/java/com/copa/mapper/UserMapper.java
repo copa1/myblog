@@ -1,9 +1,7 @@
 package com.copa.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import com.copa.model.User;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -13,10 +11,34 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper {
 
+
+    //通过用户名来查找电话号码
     @Select("select phone from user where username=#{username}")
     String findPhoneByUsername(@Param("username") String username);
 
+    //通过电话来修改该用户的最近登录时间
     @Update("update user set recentlyLanded=#{recentlyLanded} where phone=#{phone}")
     void updateRecentlyLanded(@Param("phone") String phone, @Param("recentlyLanded") String recentlyLanded);
+
+    //通过电话查找相关用户信息
+    @Select("select * from user where phone=#{phone}")
+    User findUserByPhone(@Param("phone") String phone);
+
+    //增加用户表
+    @Insert("insert into user(phone,username,password,gender,avatarImgUrl) values(#{phone},#{username},#{password},#{gender},#{avatarImgUrl})")
+    void insert(User user);
+
+    //通过电话查找用户id
+    @Select("select id from user where phone=#{phone}")
+    int findUserIdByPhone(@Param("phone") String phone);
+
+    //增加用户-权限表
+    @Insert("insert into user_role(User_id, Role_id) values (#{userId}, #{roleId})")
+    void insertRole(@Param("userId") int userId, @Param("roleId") int roleId);
+
+    //通过用户名查找用户相关信息
+    @Select("select * from user where username=#{username}")
+    User findUsernameByUsername(@Param("username") String username);
+
 
 }
