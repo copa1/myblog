@@ -68,7 +68,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .formLogin().loginPage("/login").failureUrl("/login?error").defaultSuccessUrl("/")
                 .and()
                 //退出登录后的默认url是“/”
-                .logout().logoutUrl("/logout").logoutSuccessUrl("/");
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/")
+                .and()
+                //记住我
+                .rememberMe().rememberMeParameter("rememberMe");
 
         //解决非thymeleaf的form表单提交被拦截问题
         http.csrf().disable();
