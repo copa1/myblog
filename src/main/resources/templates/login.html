@@ -37,10 +37,20 @@
 
         <form method="post" class="am-form" th:action="@{/login}">
             <label for="phone">手机号:</label>
-            <input type="text" name="username" id="phone">
+
+                <div class="input-group-addon"><span class="fa fa-phone fa-lg"></span></div>
+                <input type="text" name="username" id="phone" placeholder="这里输入手机号哦~">
+                <span id="phone_null" class="icons am-icon-warning" style="color: orange"></span>
+                <span id="phone_error" class="icons am-icon-times" style="color: red"></span>
+
+
             <br>
             <label for="password">密码:</label>
-            <input type="password" name="password" id="password">
+
+                <div class="input-group-addon"><span class="fa fa-lock fa-lg"></span></div>
+                <input type="password" name="password" id="password" placeholder="在这里悄悄输入密码喔~">
+                <span id="password_null" class="icons am-icon-warning" style="color: orange"></span>
+
             <br>
             <label for="remember-me">
                 <input id="remember-me" type="checkbox" name="rememberMe">
@@ -48,7 +58,7 @@
             </label>
             <br />
             <div class="am-cf">
-                <input type="submit" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl">
+                <input type="submit" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl" id="loginFormSubmit">
                 <input type="reset" value="重 置" class="am-btn am-btn-default am-btn-sm am-fr">
             </div>
         </form>
@@ -67,5 +77,8 @@
             <!--网站尾部-->
             <footer th:replace="commons/blog_bar::footer"></footer>
         </div>
+    </div>
+    <script th:src="@{js/login.js}"></script>
+    <script th:src="@{js/all.js}"></script>
 </body>
 </html>
