@@ -2,6 +2,7 @@ package com.copa.repository.mybatis;
 
 import com.copa.model.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -17,4 +18,5 @@ public interface UserRepository {
      * @return 用户
      */
     User findByPhone(String phone);
+
 }
