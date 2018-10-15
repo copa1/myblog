@@ -6,6 +6,7 @@ import com.copa.repository.mybatis.UserRepository;
 import com.copa.service.UserService;
 import com.copa.utils.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -32,7 +33,7 @@ public class CustomUserService implements UserDetailsService{
         //根据用户名从数据库查询对应记录
         User user=userRepository.findByPhone(phone);
         if (user == null){
-            return (UserDetails) new UsernameNotFoundException("用户不存在");
+            return (UserDetails) new BadCredentialsException("用户不存在");
         }
 
         TimeUtil timeUtil = new TimeUtil();
@@ -44,7 +45,7 @@ public class CustomUserService implements UserDetailsService{
             authorities.add(new SimpleGrantedAuthority(role.getName()));
         }
 
-        System.out.println(phone + "用户登录成功");
+        //System.out.println(phone + "用户登录成功");
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
     }
 }
