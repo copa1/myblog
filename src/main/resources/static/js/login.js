@@ -3,7 +3,7 @@
 $('.icons').hide();
 $('.modal_icons').hide();
 
-//登录表单
+//电话框
 var phone = $("#phone");
 var phone_null = $("#phone_null");
 var phone_error = $("#phone_error");
@@ -28,6 +28,7 @@ phone.focus(function () {
     phone_error.hide();
     login_error.css("visibility","hidden");
 });
+
 //登录表单提交
 var loginFormSubmit = $("#loginFormSubmit");
 var password = $("#password");

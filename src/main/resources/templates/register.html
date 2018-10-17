@@ -34,38 +34,62 @@
     <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
         <h3>注册</h3>
         <hr>
-
-        <form method="post" class="am-form" th:action="@{/register}">
+        <div id="register_big">
+            <div id="register_clear">
+        <form id="registerForm" class="am-form">
             <label for="phone">手机号:</label>
-            <input type="text" name="phone" id="phone">
+            <div class="input-group-addon"><span class="fa fa-phone fa-lg"></span></div>
+            <input type="text" name="phone" id="phone" placeholder="快来注册个手机号吧~">
+            <span id="phone_null" class="icons am-icon-warning" style="color: orange">手机号不能为空！</span>
+            <span id="phone_error" class="icons am-icon-times" style="color: red">请输入正确的手机号格式</span>
+            <div id="phone_warn" class="input_warn" style="color: orange">
+                <span>该手机号已存在！</span>
+            </div>
             <br>
             <label for="username">用户名:</label>
-            <input type="text" name="username" id="username">
+            <div class="input-group-addon"><span class="fa fa-user fa-lg"></span></div>
+            <input type="text" name="username" id="username" placeholder="快来起个用户名吧~">
+            <span id="username_null" class="icons am-icon-warning" style="color: orange">用户名不能为空！</span>
+            <div id="username_warn" class="input_warn" style="color: orange">
+                <span>该用户名已存在</span>
+            </div>
             <br>
             <label for="password">密码:</label>
-            <input type="password" name="password" id="password">
+            <div class="input-group-addon"><span class="fa fa-lock fa-lg"></span></div>
+            <input type="password" name="password" id="password" placeholder="悄悄的输入你的密码哦">
+            <span id="password_null" class="icons am-icon-warning" style="color: orange">密码不能为空！</span>
+            <div class="input_warn" style="color: red">
+                <span>密码错误</span>
+            </div>
             <br>
-            <div class="am-form-group">
+            <label style="margin-top: 15px">性别:</label>
+            <div class="am-form-group radio_input">
                 <label class="am-radio-inline">
-                    <input type="radio"  name="gender" value="male"> 男
+                    <input type="radio"  name="gender" value="male" data-am-ucheck> 男
                 </label>
                 <label class="am-radio-inline">
-                    <input type="radio" name="gender" value="female"> 女
+                    <input type="radio" name="gender" value="female" data-am-ucheck> 女
                 </label>
-
+                <div class="gender_null">
+                    <span id="gender_null" class="icons" style="color: red">就不能告诉我你是GG还是MM么 o(╥﹏╥)o</span>
+                </div>
             </div>
-
-            <div class="am-cf">
-                <input type="submit" value="注 册" class="am-btn am-btn-primary am-btn-sm am-fl">
-                <input type="reset" value="重 置" class="am-btn am-btn-default am-btn-sm am-fr">
-            </div>
+            <br>
         </form>
+            <div class="am-u-sm-12" style="padding: 0">
+                <input type="submit" id="registerFormBtn" value="注 册" class="am-btn am-btn-primary am-btn-sm am-fl" style="border-radius: 5px">
+                <a th:href="@{/login}" type="button" class="am-btn am-btn-default am-btn-sm am-fr" style="border-radius: 5px">
+                    去登录页~
+                </a>
+            </div>
+            </div>
+        </div>
 
     </div>
 
 </div>
 
-</div>
+
 <hr/>
 <div class="am-g">
     <div class="am-u-sm-2"></div>
@@ -73,5 +97,8 @@
         <!--网站尾部-->
         <footer th:replace="commons/blog_bar::footer"></footer>
     </div>
+
+    <script th:src="@{js/register.js}"></script>
+    <script th:src="@{js/all.js}"></script>
 </body>
 </html>
