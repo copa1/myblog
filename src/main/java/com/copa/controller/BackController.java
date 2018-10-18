@@ -3,6 +3,8 @@ package com.copa.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  *  所有页面跳转
  */
@@ -21,4 +23,10 @@ public class BackController {
         return "register";
     }
 
+    //打开个人用户页面
+    @GetMapping("/user")
+    public String user(HttpServletRequest request){
+        request.getSession().removeAttribute("lastUrl");
+        return "user";
+    }
 }
