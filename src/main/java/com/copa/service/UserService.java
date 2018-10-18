@@ -1,6 +1,7 @@
 package com.copa.service;
 
 import com.copa.model.User;
+import net.sf.json.JSONObject;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -29,4 +30,24 @@ public interface UserService {
      * @return true--存在  false--不存在
      */
     boolean usernameIsExit(String username);
+
+    /**
+     * 获得用户个人信息
+     * @return
+     */
+    JSONObject getUserPersonalInfoByUsername(String username);
+
+    /**
+     * 通过用户名查找id
+     * @param username
+     * @return
+     */
+    int findIdByUsername(String username);
+
+    /**
+     * 获得头像url
+     * @param username 用username来查找用户id
+     * @return
+     */
+    JSONObject getHeadPortraitUrl(int id);
 }

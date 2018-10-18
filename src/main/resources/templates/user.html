@@ -84,8 +84,7 @@
                         <form id="personalDateForm">
                             <div class="userNameTable">
                                 <label for="username">昵称</label>
-                                <input class="formInput" type="text" id="username" placeholder="填写你的昵称" th:value="${session.SPRING_SECURITY_CONTEXT.authentication.principal.username}
-">
+                                <input class="formInput" type="text" id="username" placeholder="填写你的昵称">
                                 <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
                             </div>
                             <div class="phoneTable">
@@ -131,18 +130,13 @@
                     </div>
                 </div>
             </div>
+            <!-- -->
             <div id="basicSetting">
-                <div class="zhy-basicSetting">
+                <div class="copa-basicSetting">
                     <form id="basicSettingForm">
                         <div class="phoneTable">
                             <label for="phone">手机</label>
                             <input class="formInput" type="text" id="phone" placeholder="填写你的手机号">
-                            <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
-                        </div>
-                        <div class="authCodeTable">
-                            <label for="authCode">验证码</label>
-                            <input class="formInput" type="text" id="authCode" placeholder="填写验证码">
-                            <button type="button" id="authCodeBtn" class="authCodeBtn am-btn am-btn-secondary am-round am-btn-sm">获取验证码</button>
                             <hr data-am-widget="divider" style="" class="am-divider am-divider-default" />
                         </div>
                         <div class="passwordTable">
@@ -162,12 +156,15 @@
 <hr/>
 <div class="am-g">
     <div class="am-u-sm-2"></div>
-    <div class="am-u-sm-6 am-u-sm-offset-5">
+    <div class="am-u-sm-8 am-u-sm-offset-3">
         <!--网站尾部-->
         <footer th:replace="commons/blog_bar::footer"></footer>
     </div>
 </div>
-<script th:src="@{js/login.js}"></script>
-<script th:src="@{js/all.js}"></script>
+        </div>
+    </div>
+</div>
+<script th:src="@{js/user.js}"></script>
+<script th:src="@{js/plugs_paging.js}"></script>
 </body>
 </html>

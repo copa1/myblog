@@ -4,6 +4,7 @@ import com.copa.constant.RoleConstant;
 import com.copa.mapper.UserMapper;
 import com.copa.model.User;
 import com.copa.service.UserService;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +41,43 @@ public class UserServiceImpl implements UserService{
     public boolean usernameIsExit(String username) {
         User user = userMapper.findUsernameByUsername(username);
         return user != null;
+    }
+
+    @Override
+    public JSONObject getUserPersonalInfoByUsername(String username) {
+        User user = userMapper.getUserPersonalInfoByUsername(username);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("status",200);
+        JSONObject userJon = new JSONObject();
+        userJon.put("phone",user.getPhone());
+        userJon.put("username",user.getUsername());
+        userJon.put("gender",user.getGender());
+        userJon.put("trueName",user.getTrueName());
+        userJon.put("birthday",user.getBirthday());
+        userJon.put("email",user.getEmail());
+        userJon.put("personalBrief",user.getPersonalBrief());
+        userJon.put("avatarImgUrl",user.getAvatarImgUrl());
+        jsonObject.put("result",userJon);
+        return jsonObject;
+    }
+
+    @Override
+    public int findIdByUsername(String username) {
+        return userMapper.findIdByUsername(username);
+    }
+
+    @Override
+    public JSONObject getHeadPortraitUrl(int id) {
+        JSONObject jsonObject = new JSONObject();
+        String avatarImgUrl = userMapper.getHeadPortraitUrl(id);
+        if(!"".equals(avatarImgUrl) && avatarImgUrl != null){
+            jsonObject.put("status",200);
+            jsonObject.put("avatarImgUrl",avatarImgUrl);
+        }else {
+            jsonObject.put("status",404);
+            jsonObject.put("avatarImgUrl","http://www.qqtouxiang.com/d/file/tupian/mx/20170807/jiqwys341azf0.jpg");
+        }
+        return jsonObject;
     }
 
     /**

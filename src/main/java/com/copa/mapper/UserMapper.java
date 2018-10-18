@@ -40,5 +40,15 @@ public interface UserMapper {
     @Select("select * from user where username=#{username}")
     User findUsernameByUsername(@Param("username") String username);
 
+    //通过用户名来查找用户相关信息
+    @Select("select * from user where username=#{username}")
+    User getUserPersonalInfoByUsername(String username);
 
+    //通过用户名来查找该用户id
+    @Select("select id from user where username=#{username}")
+    int findIdByUsername(String username);
+
+    //通过id（用户名）来查该用户的头像
+    @Select("select avatarImgUrl from user where id=#{id}")
+    String getHeadPortraitUrl(int id);
 }
