@@ -80,6 +80,11 @@ public class UserServiceImpl implements UserService{
         return jsonObject;
     }
 
+    @Override
+    public void updateAvatarImgUrlById(String avatarImgUrl, int userId) {
+        userMapper.updateAvatarImgUrlById(avatarImgUrl, userId);
+    }
+
     /**
      * 通过手机号判断用户是否存在
      * @param phone 手机号

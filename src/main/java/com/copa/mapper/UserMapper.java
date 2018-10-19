@@ -42,13 +42,18 @@ public interface UserMapper {
 
     //通过用户名来查找用户相关信息
     @Select("select * from user where username=#{username}")
-    User getUserPersonalInfoByUsername(String username);
+    User getUserPersonalInfoByUsername(@Param("username") String username);
 
     //通过用户名来查找该用户id
     @Select("select id from user where username=#{username}")
-    int findIdByUsername(String username);
+    int findIdByUsername(@Param("username") String username);
 
     //通过id（用户名）来查该用户的头像
     @Select("select avatarImgUrl from user where id=#{id}")
-    String getHeadPortraitUrl(int id);
+    String getHeadPortraitUrl(@Param("id") int id);
+
+    //通过id来修改对应用户的头像
+    @Update("update user set avatarImgUrl=#{avatarImgUrl} where id=#{id}")
+    void updateAvatarImgUrlById(@Param("avatarImgUrl") String avatarImgUrl, @Param("id") int id);
+
 }

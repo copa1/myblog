@@ -50,4 +50,12 @@ public interface UserService {
      * @return
      */
     JSONObject getHeadPortraitUrl(int id);
+
+    /**
+     * 更改头像
+     * @param avatarImgUrl  头像地址
+     * @param userId  用户id
+     */
+    @Transactional
+    void updateAvatarImgUrlById(String avatarImgUrl, int userId);
 }
