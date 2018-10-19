@@ -56,4 +56,7 @@ public interface UserMapper {
     @Update("update user set avatarImgUrl=#{avatarImgUrl} where id=#{id}")
     void updateAvatarImgUrlById(@Param("avatarImgUrl") String avatarImgUrl, @Param("id") int id);
 
+    //通过用户名来保存个人信息
+    @Update("update user set username=#{user.username},gender=#{user.gender},trueName=#{user.trueName},birthday=#{user.birthday},email=#{user.email},personalBrief=#{user.personalBrief} where username=#{username}")
+    void savePersonalDate(@Param("user") User user, @Param("username") String username);
 }

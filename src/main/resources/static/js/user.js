@@ -153,13 +153,17 @@ savePersonalDateBtn.click(function () {
                     if(data['status'] == 200){
                         alert("更改个人信息成功,重新登录后生效");
                         $.get("/toLogin",function(data,status,xhr){
-                            window.location.replace("/login");
+                            window.location.replace("/logout");
+                            // window.location.replace("/login");
+
                         });
                     } else if (data['status'] == 500){
                         dangerNotice("该昵称已被占用");
                     } else if (data['status'] == 201){
+                        alert("更改个人信息成功");
                         successNotice("更改个人信息成功");
                     } else {
+                        alert("更改个人信息失败");
                         dangerNotice("更改个人信息失败");
                     }
                 }

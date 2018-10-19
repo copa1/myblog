@@ -58,4 +58,12 @@ public interface UserService {
      */
     @Transactional
     void updateAvatarImgUrlById(String avatarImgUrl, int userId);
+
+    /**
+     * 保存用户个人信息
+     * @param user 个人信息
+     * @param username 当前更改的用户
+     * @return
+     */
+    JSONObject savePersonalDate(User user, String username);
 }

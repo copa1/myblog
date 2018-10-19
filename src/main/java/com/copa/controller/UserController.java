@@ -1,5 +1,6 @@
 package com.copa.controller;
 
+import com.copa.model.User;
 import com.copa.service.UserService;
 import com.copa.utils.FileUtil;
 import com.copa.utils.TimeUtil;
@@ -86,5 +87,24 @@ public class UserController {
             return jsonObject;
         }
         return jsonObject;
+    }
+
+    /**
+     * 保存个人资料
+     */
+    @PostMapping("/savePersonalDate")
+    public JSONObject savePersonalDate(User user, @AuthenticationPrincipal Principal principal){
+
+        String username;
+        try {
+            username = principal.getName();
+        } catch (NullPointerException e){
+            JSONObject jsonObject = new JSONObject();
+            logger.info("This user is not login");
+            jsonObject.put("status",403);
+            jsonObject.put("result","This user is not login");
+            return jsonObject;
+        }
+        return userService.savePersonalDate(user, username);
     }
 }

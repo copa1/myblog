@@ -85,6 +85,28 @@ public class UserServiceImpl implements UserService{
         userMapper.updateAvatarImgUrlById(avatarImgUrl, userId);
     }
 
+    @Override
+    public JSONObject savePersonalDate(User user, String username) {
+        JSONObject returnJson = new JSONObject();
+
+        //改了昵称
+        if(!user.getUsername().equals(username)){
+            if(usernameIsExit(user.getUsername())){
+                //昵称存在
+                returnJson.put("status",500);
+                return returnJson;
+            }
+            returnJson.put("status",200);
+        }
+        //没改昵称
+        else {
+            returnJson.put("status",201);
+        }
+        userMapper.savePersonalDate(user, username);
+
+        return returnJson;
+    }
+
     /**
      * 通过手机号判断用户是否存在
      * @param phone 手机号
