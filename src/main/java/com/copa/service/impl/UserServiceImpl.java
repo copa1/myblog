@@ -107,6 +107,16 @@ public class UserServiceImpl implements UserService{
         return returnJson;
     }
 
+    @Override
+    public User findUserByPhone(String phone) {
+        return userMapper.findUserByPhone(phone);
+    }
+
+    @Override
+    public void updatePasswordByPhone(String phone, String md5Password) {
+        userMapper.updatePassword(phone, md5Password);
+    }
+
     /**
      * 通过手机号判断用户是否存在
      * @param phone 手机号

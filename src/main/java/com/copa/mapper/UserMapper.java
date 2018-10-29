@@ -59,4 +59,9 @@ public interface UserMapper {
     //通过用户名来保存个人信息
     @Update("update user set username=#{user.username},gender=#{user.gender},trueName=#{user.trueName},birthday=#{user.birthday},email=#{user.email},personalBrief=#{user.personalBrief} where username=#{username}")
     void savePersonalDate(@Param("user") User user, @Param("username") String username);
+
+    //通过手机号来修改用户密码
+    @Update("update user set password=#{password} where phone=#{phone}")
+    void updatePassword(@Param("phone") String phone, @Param("password") String password);
+
 }

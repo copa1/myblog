@@ -1,4 +1,5 @@
 
+//点击左侧的列表跳转到对应的页面
 $('.userList .clickLi').click(function () {
     var flag = $(this).attr('class').substring(8);
     $('#personalDate,#basicSetting,#articleManagement,#articleCollection,#articleCategories,#leaveMessage,#privateWord').css("display","none");
@@ -158,6 +159,7 @@ savePersonalDateBtn.click(function () {
 
                         });
                     } else if (data['status'] == 500){
+                        alert("该昵称已被占用");
                         dangerNotice("该昵称已被占用");
                     } else if (data['status'] == 201){
                         alert("更改个人信息成功");
@@ -174,6 +176,50 @@ savePersonalDateBtn.click(function () {
     }
 });
 
+var phone=$('#phone');
+var password=$('#password');
+var surePassword=$('#surePassword');
+
+//修改密码
+$('#changePasswordBtn').click(function () {
+    $('.notice').css("display","none");
+    if(phone.val().length === 0){
+        dangerNotice("手机号不能为空");
+    } else if (phone.hasClass("wrong")){
+        dangerNotice("手机号不正确");
+    }  else if (password.val().length === 0){
+        dangerNotice("新密码不能为空");
+    } else if (surePassword.val().length === 0){
+        dangerNotice("确认密码不能为空");
+    } else{
+        if (password.val() !== surePassword.val()){
+            dangerNotice("确认密码不正确");
+        } else {
+            $.ajax({
+                type:'post',
+                url:'/changePassword',
+                dataType:'json',
+                data:{
+                    phone:phone.val(),
+                    newPassword:password.val()
+                },
+                success:function (data) {
+                    if (data == "2"){
+                        alert("手机号不存在");
+                        dangerNotice("手机号不存在")
+                    }else if(data == "1"){
+                        alert("密码修改成功！");
+                        successNotice("密码修改成功");
+                    }
+                },
+                error:function () {
+                    alert("修改密码失败");
+                }
+            })
+        }
+    }
+});
+//基本信息先获取个人信息
 showHeadPortrait();
 getUserPersonalInfo();
 

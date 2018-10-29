@@ -66,4 +66,18 @@ public interface UserService {
      * @return
      */
     JSONObject savePersonalDate(User user, String username);
+
+    /**
+     * 通过手机号查找注册用户
+     * @param phone 手机号
+     * @return 用户
+     */
+    User findUserByPhone(String phone);
+
+    /**
+     * 通过手机号修改密码
+     * @param phone 手机号
+     * @param md5Password 加密后的密码
+     */
+    void updatePasswordByPhone(String phone, String md5Password);
 }
