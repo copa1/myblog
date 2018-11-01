@@ -82,13 +82,13 @@
                     // alert("打开模态框失败");
                 }
             });
-        }});
-    //     // 定时关闭错误提示框
-    //     var closeNoticeBox = setTimeout(function () {
-    //         noticeBox.hide();
-    //     },3000);
-    // });
-    //
+        }
+        // 定时关闭错误提示框
+        var closeNoticeBox = setTimeout(function () {
+            noticeBox.hide();
+        },3000);
+    });
+
     // function publishSuccessPutIn(data) {
     //     $('#removeDiv').html('');
     //     var sec = $('<div id="all"></div>');

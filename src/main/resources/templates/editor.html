@@ -9,11 +9,13 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="stylesheet" th:href="@{/css/amazeui.min.css}"/>
+    <link rel="stylesheet" th:href="@{css/amazeui.min.css}"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/amazeui/2.7.2/css/amazeui.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}">
+
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" th:href="@{css/all.css}">
+    <link rel="stylesheet" th:href="@{css/editormd/editor.css}" />
     <link rel="stylesheet" th:href="@{css/editormd/editormd.css}" />
     <link rel="stylesheet" th:href="@{css/editormd/editormd.min.css}" />
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
@@ -120,9 +122,16 @@
     </div>
 </div>
 
-
 <!-- 模态框（Modal） -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!--<div class="am-modal-dialog">-->
+        <!--<div class="am-modal-hd">Modal 标题-->
+            <!--<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>-->
+        <!--</div>-->
+        <!--<div class="am-modal-bd">-->
+            <!--Modal 内容。本 Modal 无法通过遮罩层关闭。-->
+        <!--</div>-->
+    <!--</div>-->
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -209,7 +218,6 @@
                     发表博客
                 </button>
             </div>
-            </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
     <div class="notice-box notice-box-tags">
@@ -236,7 +244,8 @@
         <i class="am-icon-exclamation-circle"></i>
         <span> 原文链接不能为空</span>
     </div>
-
+</div>
+</div>
 <!--网站尾部-->
 <footer th:replace="commons/blog_bar::footer"></footer>
 
@@ -252,6 +261,6 @@
 <script th:src="@{js/amazeui.min.js}"></script>
 <script th:src="@{js/editormd/editormd.js}"></script>
 <script th:src="@{js/editormd/editor.js}"></script>
-
+<script th:src="@{/js/bootstrap.min.js}"></script>
 </body>
 </html>
