@@ -11,6 +11,7 @@
     window.addEventListener('beforeunload',fnClose);
 
     var testEditor;
+    //显示Markdown编辑框
     $(function() {
         testEditor = editormd("my-editormd", { //注意1：这里的就是上面的DIV的id属性值
                 width: "100%",
@@ -39,46 +40,49 @@
 
         });
 
-    // var publishBtn = $('.publishBtn');
-    // var articleTitle = $('#zhy-editor-title');
-    // var articleContent = $('#my-editormd-html-code');
-    // var noticeBoxTitle = $('.notice-box-title');
-    // var noticeBoxContent = $('.notice-box-content');
-    // var noticeBox = $('.notice-box');
-    //
-    // publishBtn.click(function () {
-    //     var articleTitleValues =  articleTitle.val();
-    //     var articleContentValues = articleContent.val();
-    //     if(articleTitleValues.length === 0){
-    //         noticeBoxTitle.show();
-    //     } else if (articleContentValues.length === 0){
-    //         noticeBoxContent.show();
-    //     } else{
-    //         $('#myModal').modal({
-    //             show:true
-    //         });
-    //         $.ajax({
-    //             type:"GET",
-    //             url:"/findCategoriesName",
-    //             async:false,
-    //             data:{
-    //             },
-    //             dataType:"json",
-    //             success:function (data) {
-    //                 var selectCategories = $('#select-categories');
-    //                 selectCategories.empty();
-    //                 selectCategories.append($('<option class="categoriesOption" value="choose">请选择</option>'));
-    //                 for(var i=0;i<data.length;i++){
-    //                     selectCategories.append($('<option class="categoriesOption" value="' + data[i] + '">' + data[i] + '</option>'));
-    //                 }
-    //                 if(aCategory !== "" && aCategory.length > 0){
-    //                     selectCategories.val(aCategory);
-    //                 }
-    //             },
-    //             error:function () {
-    //             }
-    //         });
-    //     }
+    var publishBtn = $('.publishBtn');
+    var articleTitle = $('#copa-editor-title');
+    var articleContent = $('#my-editormd-html-code');
+    var noticeBoxTitle = $('.notice-box-title');
+    var noticeBoxContent = $('.notice-box-content');
+    var noticeBox = $('.notice-box');
+
+    //点击“发布博客”按钮
+    publishBtn.click(function () {
+        var articleTitleValues =  articleTitle.val();
+        var articleContentValues = articleContent.val();
+        if(articleTitleValues.length === 0){
+            noticeBoxTitle.show();
+        } else if (articleContentValues.length === 0){
+            noticeBoxContent.show();
+        } else{
+            $('#myModal').modal({
+                show:true
+            });
+            $.ajax({
+                type:"GET",
+                url:"/findCategoriesName",
+                async:false,
+                data:{
+                },
+                dataType:"json",
+                success:function (data) {
+                    // alert("success");
+                    var selectCategories = $('#select-categories');
+                    selectCategories.empty();
+                    selectCategories.append($('<option class="categoriesOption" value="choose">请选择</option>'));
+                    for(var i=0;i<data.length;i++){
+                        selectCategories.append($('<option class="categoriesOption" value="' + data[i] + '">' + data[i] + '</option>'));
+                    }
+                    if(aCategory !== "" && aCategory.length > 0){
+                        selectCategories.val(aCategory);
+                    }
+                },
+                error:function () {
+                    // alert("打开模态框失败");
+                }
+            });
+        }});
     //     // 定时关闭错误提示框
     //     var closeNoticeBox = setTimeout(function () {
     //         noticeBox.hide();
