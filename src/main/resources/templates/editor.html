@@ -1,0 +1,266 @@
+<!doctype html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>写博客</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="stylesheet" th:href="@{/css/amazeui.min.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/amazeui/2.7.2/css/amazeui.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" th:href="@{css/all.css}">
+    <link rel="stylesheet" th:href="@{css/editormd/editormd.css}" />
+    <link rel="stylesheet" th:href="@{css/editormd/editormd.min.css}" />
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/underscore.js/1.9.0/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/amazeui/2.7.2/js/amazeui.min.js"></script>
+    <script th:src="@{js/jquery.min.js}"></script>
+    <script th:src="@{js/editormd/editormd.min.js}"></script>
+    <style>
+        @media only screen and (min-width: 1200px) {
+            .blog-g-fixed {
+                max-width: 1200px;
+            }
+        }
+
+        @media only screen and (min-width: 641px) {
+            .blog-sidebar {
+                font-size: 1.4rem;
+            }
+        }
+
+        .blog-main {
+            padding: 20px 0;
+        }
+
+        .blog-title {
+            margin: 10px 0 20px 0;
+        }
+
+        .blog-meta {
+            font-size: 14px;
+            margin: 10px 0 20px 0;
+            color: #222;
+        }
+
+        /*隐藏markdown全窗口预览不会关闭的bug，会导致其他fa选择器同时隐藏*/
+        .fa{
+            display: none;
+        }
+
+        .blog-meta a {
+            color: #27ae60;
+        }
+
+        .blog-pagination a {
+            font-size: 1.4rem;
+        }
+
+        .blog-team li {
+            padding: 4px;
+        }
+
+        .blog-team img {
+            margin-bottom: 0;
+        }
+
+        .blog-content img,
+        .blog-team img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .blog-footer {
+            padding: 10px 0;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<!--网站头部-->
+<header th:replace="commons/blog_bar::header"></header>
+
+<!--editormd插件编辑框 markdown 新手版-->
+<!--<div id="my-editormd" >-->
+    <!--<textarea id="my-editormd-markdown-doc" name="my-editormd-markdown-doc" style="display:none;"></textarea>-->
+    <!--&lt;!&ndash; 第二个隐藏文本域，用来构造生成的HTML代码，方便表单POST提交，这里的name可以任意取，后台接受时以这个name键为准 &ndash;&gt;-->
+    <!--<textarea id="my-editormd-html-code" name="my-editormd-html-code" style="display:none;"></textarea>-->
+<!--</div>-->
+
+<div id="writeArticle">
+    <div class="copa-editor" >
+        <div class="copa-editor-input">
+            <input id="copa-editor-title" type="text" placeholder="输入文章标题">
+            <button type="button" class="publishBtn am-btn am-btn-danger" data-toggle="modal">发布博客</button>
+        </div>
+    </div>
+    <div class="copa-editor-writing">
+        <!--MarkDown的id标志 -->
+        <div id="my-editormd">
+            <!-- 书写与实时显示的textarea -->
+            <textarea id="my-editormd-markdown-doc" name="my-editormd-markdown-doc" style="display:none;"></textarea>
+            <!-- 用于后端获取md稳当内容，Java中：request.getParameter("my-editormd-html-code")。 -->
+            <textarea id="my-editormd-html-code" name="my-editormd-html-code" style="display:none;"></textarea>
+        </div>
+    </div>
+
+    <div class="notice-box notice-box-title">
+        <i class="am-icon-exclamation-circle"></i>
+        <span> 文章标题不能为空</span>
+    </div>
+    <div class="notice-box notice-box-content">
+        <i class="am-icon-exclamation-circle"></i>
+        <span> 文章內容不能为空</span>
+    </div>
+</div>
+
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close am-close am-close-alt am-close-spin" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    发布博客
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="article-setting">
+                    <div class="article-tag row">
+
+                        <div class="tags">
+                            <div class="tag-inline">
+                                <label class="publish-tag">文章标签<strong>:</strong></label>
+                                <div class="tag">
+
+                                </div>
+                                <button class="addTagsBtn">
+
+                                    <i class="am-icon-plus-circle"></i>
+                                    添加标签
+                                </button>
+                            </div>
+                            <span style="display: block;margin-left:67px;">最多添加5个标签</span>
+                        </div>
+                    </div>
+                    <div class="article-type row">
+                        <label class="publish-tag">文章类型<strong>:</strong></label>
+                        <div class="type">
+                            <select id="select-type">
+                                <option value="choose" selected>请选择</option>
+                                <option value="原创">原创</option>
+                                <option value="转载">转载</option>
+                            </select>
+                            <span class="required">*</span>
+                        </div>
+
+                        <label class="publish-tag" style="margin-left: 40px">博客分类<strong>:</strong></label>
+                        <div class="categories">
+                            <select id="select-categories">
+                                <option value="choose">请选择</option>
+                            </select>
+                            <span class="required">*</span>
+                        </div>
+                    </div>
+                    <div class="article-tag row">
+                        <label class="publish-tag">文章等级<strong>:</strong></label>
+                        <div class="grade">
+                            <select id="select-grade">
+                                <option value="choose" selected>请选择</option>
+                                <option value="12">☆</option>
+                                <option value="15">☆☆</option>
+                                <option value="17">☆☆☆</option>
+                                <option value="18">☆☆☆☆</option>
+                                <option value="20">☆☆☆☆☆</option>
+                            </select>
+                            <span class="required">*</span>
+                        </div>
+
+                        <div id="originalAuthorHide" style="display: inline-block">
+                            <label class="publish-tag" style="margin-left: 40px;display: inline-block">文章作者<strong>:</strong></label>
+                            <div class="originalAuthor" style="display: inline-block">
+                                <input type="text" id="originalAuthor" placeholder="请输入文章原作者">
+                                <span class="required">*</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="articleUrlHide row">
+                        <label class="publish-tag" style="display: inline-block">原文链接<strong>:</strong></label>
+                        <div class="url" style="display: inline-block">
+                            <input type="text" id="articleUrl" placeholder=" 请输入原文链接">
+                            <span class="required">*</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default closeBtn" data-dismiss="modal">取消
+                </button>
+                <button type="button" class="surePublishBtn am-btn am-btn-danger">
+                    发表博客
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+    <div class="notice-box notice-box-tags">
+        <i class="am-icon-exclamation-circle"></i>
+        <span> 文章标签不能为空</span>
+    </div>
+    <div class="notice-box notice-box-type">
+        <i class="am-icon-exclamation-circle"></i>
+        <span> 文章类型不能为空</span>
+    </div>
+    <div class="notice-box notice-box-categories">
+        <i class="am-icon-exclamation-circle"></i>
+        <span> 博客分类不能为空</span>
+    </div>
+    <div class="notice-box notice-box-grade">
+        <i class="am-icon-exclamation-circle"></i>
+        <span> 文章等级不能为空</span>
+    </div>
+    <div class="notice-box notice-box-originalAuthor">
+        <i class="am-icon-exclamation-circle"></i>
+        <span> 原作者不能为空</span>
+    </div>
+    <div class="notice-box notice-box-url">
+        <i class="am-icon-exclamation-circle"></i>
+        <span> 原文链接不能为空</span>
+    </div>
+
+<!--网站尾部-->
+<footer th:replace="commons/blog_bar::footer"></footer>
+
+<!--[if lt IE 9]>
+<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script th:src="@{js/amazeui.ie8polyfill.min.js}"></script>
+<![endif]-->
+
+<!--[if (gte IE 9)|!(IE)]><!-->
+<script th:src="@{js/jquery.min.js}"></script>
+<!--<![endif]-->
+<script th:src="@{js/amazeui.min.js}"></script>
+
+<script type="text/javascript">
+    $(function() {
+        editormd("my-editormd", {//注意1：这里的就是上面的DIV的id属性值
+            width   : "90%",
+            height  : 640,
+            syncScrolling : "single",
+            path    : "/lib/",//注意2：你的路径
+            saveHTMLToTextarea : true//注意3：这个配置，方便post提交表单
+        });
+    });
+</script>
+
+</body>
+</html>

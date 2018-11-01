@@ -112,7 +112,11 @@
                 <div class="am-topbar-right" th:unless="${#httpServletRequest.remoteUser}">
                     <a th:href="@{/login}" class="loginBtn am-btn am-btn-primary am-topbar-btn am-btn-sm" style="color: white">登录</a>
                 </div>
-
+                <div class="am-topbar-right writing am-hide-md-down" th:if="${#httpServletRequest.remoteUser}">
+                    <a  href="/editor" target="_blank" style="text-decoration: none">
+                        <span class="write-word">写博客</span>
+                    </a>
+                </div>
             </ul>
         </div>
 

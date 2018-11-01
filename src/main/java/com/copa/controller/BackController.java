@@ -37,4 +37,15 @@ public class BackController {
         //保存跳转页面的url
         request.getSession().setAttribute("lastUrl", request.getHeader("Referer"));
     }
+
+    //去编辑博客页面
+    @GetMapping("/editor")
+    public String editor(HttpServletRequest request){
+        request.getSession().removeAttribute("lastUrl");
+        String id = request.getParameter("id");
+        if(!"".equals(id)){
+            request.getSession().setAttribute("id", id);
+        }
+        return "editor";
+    }
 }

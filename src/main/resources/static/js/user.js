@@ -184,15 +184,20 @@ var surePassword=$('#surePassword');
 $('#changePasswordBtn').click(function () {
     $('.notice').css("display","none");
     if(phone.val().length === 0){
+        alert("手机号不能为空");
         dangerNotice("手机号不能为空");
     } else if (phone.hasClass("wrong")){
+        alert("手机号不正确");
         dangerNotice("手机号不正确");
     }  else if (password.val().length === 0){
+        alert("新密码不能为空");
         dangerNotice("新密码不能为空");
     } else if (surePassword.val().length === 0){
+        alert("确认密码不能为空");
         dangerNotice("确认密码不能为空");
     } else{
         if (password.val() !== surePassword.val()){
+            alert("确认密码不正确");
             dangerNotice("确认密码不正确");
         } else {
             $.ajax({
