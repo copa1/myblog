@@ -104,7 +104,7 @@
         delay                : 300,            // Delay parse markdown to html, Uint : ms
         autoLoadModules      : true,           // Automatic load dependent module files
         watch                : true,
-        placeholder          : "欢迎来到张先森的创作中心，让我们一起开始创作之旅吧！",
+        placeholder          : "这里写博客内容哦o(∩_∩)o ",
         gotoLine             : true,
         codeFold             : false,
         autoHeight           : false,
@@ -3366,7 +3366,7 @@
     // Emoji graphics files url path
     editormd.emoji     = {
         // path  : "http://www.emoji-cheat-sheet.com/graphics/emojis/",
-        path : "../../emoji/",
+        path : "/emoji/",
         ext   : ".png"
     };
 
